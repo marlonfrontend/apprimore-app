@@ -1,4 +1,4 @@
-import { View as TView, type ViewProps } from 'react-native'
+import { View, type ViewProps } from 'react-native'
 
 import { useThemeColor } from '@/hooks/useThemeColor'
 
@@ -7,7 +7,7 @@ export type ThemedViewProps = ViewProps & {
   darkColor?: string
 }
 
-export const View = ({
+export const Box = ({
   style,
   lightColor,
   darkColor,
@@ -18,5 +18,5 @@ export const View = ({
     'background'
   )
 
-  return <TView style={[{ backgroundColor }, style]} {...otherProps} />
+  return <View style={[{ backgroundColor }, style]} {...otherProps} />
 }

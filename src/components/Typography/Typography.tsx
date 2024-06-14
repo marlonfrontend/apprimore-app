@@ -1,4 +1,4 @@
-import { Text as TText, type TextProps, StyleSheet } from 'react-native'
+import { Text, type TextProps, StyleSheet } from 'react-native'
 
 import { useThemeColor } from '@/hooks/useThemeColor'
 
@@ -8,7 +8,7 @@ export type ThemedTextProps = TextProps & {
   type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link'
 }
 
-export const Text = ({
+export const Typography = ({
   style,
   lightColor,
   darkColor,
@@ -18,7 +18,7 @@ export const Text = ({
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text')
 
   return (
-    <TText
+    <Text
       style={[
         { color },
         type === 'default' ? styles.default : undefined,
@@ -36,7 +36,8 @@ export const Text = ({
 const styles = StyleSheet.create({
   default: {
     fontSize: 16,
-    lineHeight: 24
+    lineHeight: 24,
+    fontFamily: 'CerealRegular'
   },
   defaultSemiBold: {
     fontSize: 16,

@@ -1,2 +1,3 @@
-export * from './Text'
-export * from './View'
+export * from './Typography'
+export * from './Box'
+export * from './Input'
