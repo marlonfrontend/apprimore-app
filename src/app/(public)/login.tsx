@@ -9,7 +9,11 @@ const Home = () => {
       </Box>
       <Box style={{ gap: 10 }}>
         <Input label="Login" onChangeText={() => console.log()} />
-        <Input label="Senha" onChangeText={() => console.log()} />
+        <Input
+          label="Senha"
+          secureTextEntry
+          onChangeText={() => console.log()}
+        />
         <TouchableOpacity style={styles.btn}>
           <Typography style={styles.btnText}>Login</Typography>
         </TouchableOpacity>

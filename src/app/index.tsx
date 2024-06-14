@@ -1,12 +1,13 @@
-import { ActivityIndicator, View } from 'react-native'
+import { Box } from '@/components'
+import { ActivityIndicator } from 'react-native'
 
 const StartPage = () => {
   return (
-    <View
+    <Box
       style={{ backgroundColor: '#c61525', flex: 1, justifyContent: 'center' }}
     >
       <ActivityIndicator size="large" color="#fff" />
-    </View>
+    </Box>
   )
 }
 

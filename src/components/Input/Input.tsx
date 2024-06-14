@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { View, TextInput, Text, StyleSheet } from 'react-native'
-
+import { View, TextInput, Text, StyleSheet, Animated } from 'react-native'
 import { InputProps } from './Input.types'
 
 export const Input = ({
@@ -11,6 +10,9 @@ export const Input = ({
   ...props
 }: InputProps) => {
   const [text, setText] = useState('')
+  const [isFocused, setIsFocused] = useState(false)
+  const borderColor = useState(new Animated.Value(0))[0]
+  const borderWidth = useState(new Animated.Value(1))[0]
 
   const handleChangeText = (newText: string) => {
     setText(newText)
@@ -19,31 +21,64 @@ export const Input = ({
     }
   }
 
+  const handleFocus = () => {
+    // setIsFocused(true)
+    Animated.parallel([
+      Animated.timing(borderColor, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: false
+      }),
+      Animated.timing(borderWidth, {
+        toValue: 2,
+        duration: 300,
+        useNativeDriver: false
+      })
+    ]).start()
+  }
+
+  const handleBlur = () => {
+    // setIsFocused(false)
+    Animated.parallel([
+      Animated.timing(borderColor, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: false
+      }),
+      Animated.timing(borderWidth, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: false
+      })
+    ]).start()
+  }
+
+  const borderColorInterpolation = borderColor.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['#ddd', '#000']
+  })
+
   return (
     <View>
-      {label && <Text style={styles.label}>{label}</Text>}
-      <View style={{ position: 'relative' }}>
-        <View
-          style={{
-            position: 'absolute',
-            zIndex: 1,
-            left: 13,
-            width: 20,
-            top: 12
-          }}
-        >
-          {startIcon}
-        </View>
+      <Animated.View
+        style={[
+          styles.input,
+          { borderColor: borderColorInterpolation, borderWidth: borderWidth }
+        ]}
+      >
+        {label && <Text style={styles.label}>{label}</Text>}
         <TextInput
-          style={[styles.input, !!startIcon && { paddingLeft: 45 }]}
+          style={styles.inputText}
           placeholder={placeholder}
           value={text}
-          selectionColor="#999"
-          cursorColor="#999"
+          selectionColor="#111"
+          cursorColor="#111"
           onChangeText={handleChangeText}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           {...props}
         />
-      </View>
+      </Animated.View>
     </View>
   )
 }
@@ -51,15 +86,16 @@ export const Input = ({
 const styles = StyleSheet.create({
   label: {
     color: '#333',
+    fontSize: 12,
     fontFamily: 'CerealMedium',
-    marginBottom: 4
+    marginTop: 2
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    fontFamily: 'CerealRegular',
     borderRadius: 5,
-    height: 45,
-    padding: 10
+    paddingHorizontal: 10,
+    paddingVertical: 5
+  },
+  inputText: {
+    fontFamily: 'CerealMedium'
   }
 })

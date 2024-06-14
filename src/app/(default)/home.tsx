@@ -1,11 +1,11 @@
-import { View, Text } from '@/components'
+import { Box, Typography } from '@/components'
 import { StyleSheet } from 'react-native'
 
 const Home = () => {
   return (
-    <View style={styles.container}>
-      <Text>Home</Text>
-    </View>
+    <Box style={styles.container}>
+      <Typography>Home</Typography>
+    </Box>
   )
 }
 
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     position: 'relative',
     justifyContent: 'flex-end'
-  },
+  }
 })
 
 export default Home

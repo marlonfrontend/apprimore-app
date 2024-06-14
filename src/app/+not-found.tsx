@@ -1,17 +1,17 @@
 import { Link, Stack } from 'expo-router'
 import { StyleSheet } from 'react-native'
-import { View, Text } from '@/components'
+import { Box, Typography } from '@/components'
 
 const NotFoundScreen = () => {
   return (
     <>
       <Stack.Screen options={{ title: 'Oops!' }} />
-      <View style={styles.container}>
-        <Text type="title">This screen doesn't exist.</Text>
+      <Box style={styles.container}>
+        <Typography type="title">This screen doesn't exist.</Typography>
         <Link href="/" style={styles.link}>
-          <Text type="link">Go to home screen!</Text>
+          <Typography type="link">Go to home screen!</Typography>
         </Link>
-      </View>
+      </Box>
     </>
   )
 }
